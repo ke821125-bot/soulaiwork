@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About · SOUL — 18년 차 웹디자이너, 쏘울의 이야기</title>
+    <meta name="description" content="2007년 쇼핑몰 제작자로 시작해 2023년 AI 교육 운영자로, 그리고 지금은 1인 사업자의 AI 조력자로. 쏘울(SOUL)의 18년 여정.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/soul-system.css">
+    <style>
+        /* ─────────────────────────────
+           PAGE HERO — editorial
+           ───────────────────────────── */
+        .about-hero {
+            background: var(--hero-bg);
+            color: var(--sand);
+            padding: 200px 0 120px;
+            position: relative;
+            overflow: hidden;
+        }
+        .about-hero-noise {
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .about-hero-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 48px;
+            position: relative;
+            z-index: 2;
+        }
+        .about-hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 80px;
+            align-items: end;
+        }
+        .about-hero-left .eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .about-hero-left .eyebrow::before {
+            content: ''; width: 36px; height: 1px; background: var(--amber);
+        }
+        .about-name {
+            font-family: var(--font-serif);
+            font-size: clamp(48px, 8vw, 140px);
+            font-weight: 300;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+            color: var(--sand);
+            margin-bottom: 20px;
+        }
+        .about-name em {
+            color: var(--amber-light);
+            font-weight: 400;
+        }
+        .about-hero-left .role {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 24px;
+            color: rgba(245,240,232,0.6);
+            font-weight: 300;
+        }
+        .about-hero-right h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(28px, 3vw, 40px);
+            font-weight: 300;
+            line-height: 1.4;
+            color: var(--sand);
+            margin-bottom: 32px;
+            text-wrap: balance;
+        }
+        .about-hero-right h1 em {
+            font-style: italic;
+            color: var(--amber-light);
+        }
+        .about-hero-right p {
+            font-size: 16px;
+            color: rgba(245,240,232,0.6);
+            line-height: 1.9;
+            font-weight: 300;
+            max-width: 560px;
+        }
+
+        /* ─────────────────────────────
+           PORTRAIT PLACEHOLDER
+           ───────────────────────────── */
+        .portrait-section {
+            background: var(--parchment);
+            padding: 100px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .portrait-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+        .portrait-frame {
+            aspect-ratio: 4 / 5;
+            background: linear-gradient(135deg, var(--warm-dark), var(--ink));
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        .portrait-frame img {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center center;
+        }
+        .portrait-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(20,23,29,0.35) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        .portrait-frame::after {
+            content: '';
+            position: absolute;
+            inset: 24px;
+            border: 1px solid rgba(200,150,62,0.2);
+            z-index: 2;
+            pointer-events: none;
+        }
+        .portrait-caption {
+            position: absolute;
+            bottom: 24px; left: 24px;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 14px;
+            color: rgba(245,240,232,0.5);
+            z-index: 2;
+        }
+        .portrait-text .section-eyebrow { color: var(--amber); }
+        .portrait-text h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(32px, 3.6vw, 48px);
+            font-weight: 300;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            margin: 20px 0 32px;
+        }
+        .portrait-text h2 em { font-style: italic; color: var(--amber); }
+        .portrait-text p {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+        .portrait-text p strong { color: var(--ink); font-weight: 500; }
+
+        /* ─────────────────────────────
+           STORY CHAPTERS — editorial long-form
+           ───────────────────────────── */
+        .story { background: var(--cream); padding: 140px 0; }
+        .chapter {
+            max-width: 1180px;
+            margin: 0 auto 120px;
+            padding: 0 48px;
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .chapter:last-child { margin-bottom: 0; }
+        .chapter-num {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--amber);
+            position: sticky;
+            top: 120px;
+        }
+        .chapter-num .year {
+            font-size: 72px;
+            line-height: 1;
+            display: block;
+            color: var(--amber);
+        }
+        .chapter-num .label {
+            font-family: var(--font-sans);
+            font-style: normal;
+            font-size: 11px;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-top: 14px;
+            display: block;
+            font-weight: 500;
+        }
+        .chapter-body h3 {
+            font-family: var(--font-serif);
+            font-size: clamp(28px, 3.2vw, 42px);
+            font-weight: 400;
+            line-height: 1.25;
+            margin-bottom: 28px;
+            letter-spacing: -0.01em;
+            text-wrap: balance;
+        }
+        .chapter-body h3 em { font-style: italic; color: var(--amber); }
+        .chapter-body p {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 2;
+            font-weight: 300;
+            margin-bottom: 20px;
+            max-width: 680px;
+        }
+        .chapter-body p strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+        .chapter-pull {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 22px;
+            line-height: 1.6;
+            color: var(--ink);
+            border-left: 2px solid var(--amber);
+            padding: 6px 0 6px 28px;
+            margin: 36px 0;
+            max-width: 620px;
+        }
+        .chapter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 32px;
+        }
+        .chapter-tags span {
+            font-size: 11px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-weight: 400;
+        }
+
+        /* ─────────────────────────────
+           SKILLS MATRIX
+           ───────────────────────────── */
+        .skills { background: var(--parchment); padding: 140px 0; border-top: 1px solid var(--border); }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 60px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+        .skill {
+            background: var(--parchment);
+            padding: 40px 36px;
+            transition: background 0.3s;
+        }
+        .skill:hover { background: var(--cream); }
+        .skill .skill-num {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 14px;
+            color: var(--amber);
+            margin-bottom: 20px;
+        }
+        .skill h4 {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            font-weight: 400;
+            line-height: 1.3;
+            margin-bottom: 16px;
+        }
+        .skill h4 em { font-style: italic; color: var(--amber); }
+        .skill p {
+            font-size: 14px;
+            color: var(--muted);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* ─────────────────────────────
+           VALUES — 인생 철학
+           ───────────────────────────── */
+        .values {
+            background: var(--ink);
+            color: var(--sand);
+            padding: 140px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .values-noise {
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .values-inner {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 48px;
+            position: relative;
+            z-index: 2;
+        }
+        .values .section-title { color: var(--sand); }
+        .values .section-desc { color: rgba(245,240,232,0.5); }
+        .values-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            margin-top: 72px;
+        }
+        .value {
+            border-top: 1px solid rgba(245,240,232,0.1);
+            padding-top: 32px;
+        }
+        .value .v-num {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 18px;
+            color: var(--amber-light);
+            margin-bottom: 18px;
+        }
+        .value h4 {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 400;
+            line-height: 1.3;
+            color: var(--sand);
+            margin-bottom: 18px;
+        }
+        .value h4 em { font-style: italic; color: var(--amber-light); }
+        .value p {
+            font-size: 15px;
+            color: rgba(245,240,232,0.55);
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        /* ─────────────────────────────
+           RESPONSIVE
+           ───────────────────────────── */
+        @media (max-width: 1000px) {
+            .about-hero { padding: 140px 0 80px; }
+            .about-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .portrait-grid { grid-template-columns: 1fr; gap: 48px; padding: 0 24px; }
+            .portrait-frame { max-width: 440px; margin: 0 auto; width: 100%; }
+            .story { padding: 80px 0; }
+            .chapter { grid-template-columns: 1fr; gap: 24px; margin-bottom: 72px; padding: 0 24px; }
+            .chapter-num { position: static; }
+            .chapter-num .year { font-size: 56px; }
+            .skills { padding: 80px 0; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .values { padding: 80px 0; }
+            .values-list { grid-template-columns: 1fr; gap: 36px; }
+            .about-hero-inner { padding: 0 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="soul-header solid" id="main-header">
+    <a href="index.html" class="logo">
+        SOUL
+        <span class="logo-sub">Since 2007</span>
+    </a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="about.html" class="current">About</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="aiwork.html">AIwork</a></li>
+            <li><a href="journal.html">Journal</a></li>
+            <li><a href="http://pf.kakao.com/_EjXzM/chat" target="_blank" class="nav-cta">상담 문의</a></li>
+        </ul>
+    </nav>
+    <button class="hamburger" id="hamburger-btn" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+    <nav>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="aiwork.html">AIwork</a>
+        <a href="journal.html">Journal</a>
+        <a href="http://pf.kakao.com/_EjXzM/chat" target="_blank" class="mobile-cta">상담 문의하기 →</a>
+    </nav>
+</div>
+
+<!-- HERO -->
+<section class="about-hero">
+    <div class="about-hero-noise"></div>
+    <div class="about-hero-inner">
+        <div class="about-hero-grid">
+            <div class="about-hero-left reveal">
+                <div class="eyebrow">ABOUT · SOUL</div>
+                <div class="about-name">쏘<em>울</em></div>
+                <div class="role">Soul — web designer &amp; AI consultant</div>
+            </div>
+            <div class="about-hero-right reveal">
+                <h1>
+                    디자인과 코드, 그 사이에서 <em>18년</em>.<br>
+                    지금은 AI가 사람을 돕는<br>
+                    <em>가장 자연스러운 방식</em>을 찾고 있습니다.
+                </h1>
+                <p>
+                    쇼핑몰을 만들어 온 시간은 결국 '비즈니스를 구조화하는 일'이었습니다.
+                    어떤 순서로 보여주고, 어떤 정보를 강조하고, 어디서 전환이 일어나는가.
+                    이 감각을 AI라는 새로운 도구 위에서 다시 펼쳐 보려 합니다.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PORTRAIT -->
+<section class="portrait-section">
+    <div class="portrait-grid">
+        <div class="portrait-frame reveal">
+            <img src="https://www.soul-aiwork.com/soul/assets/img/soul_img.jpg" alt="쏘울 프로필 이미지">
+            <span class="portrait-caption">Soul, 2026</span>
+        </div>
+        <div class="portrait-text reveal">
+            <span class="section-eyebrow">WHO I AM</span>
+            <h2>기술 전수자가 아니라,<br><em>곁에서 정리해 주는 사람</em>.</h2>
+            <p>
+                <strong>2007년, 첫 쇼핑몰을 만들었습니다.</strong>
+                그 후로 18년. 코딩과 디자인을 모두 다루며 수백 개의 프로젝트를 거쳤고,
+                수많은 브랜드의 '시작'과 '운영'을 가까이에서 봐 왔습니다.
+            </p>
+            <p>
+                지금은 한국인공지능인재개발원에서 ChatGPT 교육 과정의 홈페이지 제작과 운영,
+                교육 행정까지 <strong>1인 체계로 전담</strong>하고 있습니다.
+                그 경험은 '혼자 일하는 사람에게 AI가 얼마나 다르게 쓰여야 하는가'를
+                가르쳐 줬습니다.
+            </p>
+            <p>
+                저는 기술을 가르치려 하지 않습니다.
+                이미 일을 잘하고 있는 분들이, <strong>자기 방식을 잃지 않으면서
+                AI를 자연스럽게 끼워 넣을 수 있도록</strong> — 그 자리를 정리해 주는 사람이고 싶습니다.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- STORY CHAPTERS -->
+<section class="story">
+    <div class="container" style="padding-bottom: 60px;">
+        <div class="section-head reveal" style="text-align:left; margin-left:0;">
+            <span class="section-eyebrow">THE JOURNEY</span>
+            <h2 class="section-title">쇼핑몰에서 AI까지,<br><em>하나의 흐름</em>으로.</h2>
+        </div>
+    </div>
+
+    <article class="chapter reveal">
+        <div class="chapter-num">
+            <span class="year">2007</span>
+            <span class="label">Chapter 01 / Origin</span>
+        </div>
+        <div class="chapter-body">
+            <h3>첫 프로젝트 — <em>쇼핑몰 제작자</em>의 길로.</h3>
+            <p>
+                디자인과 코딩을 따로 보지 않는 게 좋겠다고 생각했습니다.
+                이미지를 만드는 감각과, 그 이미지를 브라우저 위에서 구조화하는 능력은
+                <strong>같은 언어의 두 가지 표현</strong>이라 믿었기 때문입니다.
+            </p>
+            <p>
+                그렇게 직접 디자인하고, 직접 퍼블리싱하고, 직접 운영하는
+                '제작자'의 포지션으로 일을 시작했습니다.
+                의뢰인과 짧은 미팅 한 번으로도 브랜드의 결이 잡히는 — 그런 감각을 키웠습니다.
+            </p>
+            <div class="chapter-pull">
+                "디자인은 취향이 아니라, 비즈니스의 순서다."
+            </div>
+            <div class="chapter-tags">
+                <span>Cafe24</span>
+                <span>Makeshop</span>
+                <span>PHP · HTML · CSS</span>
+            </div>
+        </div>
+    </article>
+
+    <article class="chapter reveal">
+        <div class="chapter-num">
+            <span class="year">2015</span>
+            <span class="label">Chapter 02 / Shift</span>
+        </div>
+        <div class="chapter-body">
+            <h3>모바일 커머스의 전환 —<br><em>반응형</em>으로 다시 짓다.</h3>
+            <p>
+                PC 중심으로 짜여 있던 쇼핑몰들이 모바일로 옮겨가던 시기.
+                기존 사이트를 단순히 '줄이는' 것이 아니라,
+                <strong>모바일에서 구매가 일어나는 흐름</strong>에 맞춰 새로 설계해야 했습니다.
+            </p>
+            <p>
+                수십 개 쇼핑몰을 반응형으로 재설계하면서,
+                디자인이란 결국 <strong>사용자가 선택을 내리는 순간의 시야</strong>를
+                관리하는 일이라는 걸 체감했습니다. 이 관점이 지금의 AI 컨설팅에도 이어집니다.
+            </p>
+            <div class="chapter-tags">
+                <span>Responsive</span>
+                <span>Mobile Commerce</span>
+                <span>Conversion</span>
+            </div>
+        </div>
+    </article>
+
+    <article class="chapter reveal">
+        <div class="chapter-num">
+            <span class="year">2023</span>
+            <span class="label">Chapter 03 / New Tool</span>
+        </div>
+        <div class="chapter-body">
+            <h3>AI와 교육 운영 —<br>한국인공지능인재개발원에서.</h3>
+            <p>
+                2023년 5월. 한국인공지능인재개발원에서 ChatGPT 교육 과정의
+                <strong>홈페이지 제작·운영, 교육 과정 운영, 행정·사무까지</strong>
+                모든 일을 1인 체계로 맡게 되었습니다.
+            </p>
+            <p>
+                이 시기에 배운 건 두 가지입니다.
+                하나, <strong>AI는 잘 쓰는 사람에게만 도구다.</strong>
+                둘, <strong>1인 사업자에게 필요한 건 AI 기능 설명이 아니라 '내 일의 구조'다.</strong>
+                이 두 가지가 제가 지금 컨설팅을 시작한 이유입니다.
+            </p>
+            <div class="chapter-pull">
+                "배우는 사람은 많은데,
+                자기 일에 <em>어떻게 끼워 넣을지</em>를 몰라 멈춘다."
+            </div>
+            <div class="chapter-tags">
+                <span>ChatGPT</span>
+                <span>Education</span>
+                <span>Operations</span>
+            </div>
+        </div>
+    </article>
+
+    <article class="chapter reveal">
+        <div class="chapter-num">
+            <span class="year">2026</span>
+            <span class="label">Chapter 04 / Now</span>
+        </div>
+        <div class="chapter-body">
+            <h3>SOUL AIWORK —<br><em>조력자</em>로서의 새로운 장.</h3>
+            <p>
+                제작과 운영, 그리고 AI. 세 가지 경험을 한 사람이 쥐고 있다는 건 흔치 않습니다.
+                그래서 <strong>SOUL AIWORK</strong>라는 이름으로,
+                1:1 맞춤 AI 비즈니스 상담을 시작합니다.
+            </p>
+            <p>
+                화려한 기능 설명 대신 <strong>'당신의 일에서 AI가 어디에 들어가야 하는가'</strong>를 찾고,
+                혼자서도 오래 일할 수 있는 구조를 함께 정리합니다.
+                이것이 지금 제가 할 수 있는 가장 정직한 일이라고 믿습니다.
+            </p>
+            <div class="chapter-tags">
+                <span>1:1 Consulting</span>
+                <span>AI Workflow</span>
+                <span>Solo Business</span>
+            </div>
+        </div>
+    </article>
+</section>
+
+<!-- SKILLS -->
+<section class="skills">
+    <div class="container">
+        <div class="section-head reveal">
+            <span class="section-eyebrow">WHAT I DO</span>
+            <h2 class="section-title">제가 다루는 <em>세 가지 영역</em>.</h2>
+            <p class="section-desc">
+                각 영역은 독립적이지만, 실제로는 하나의 질문에 대한 서로 다른 답입니다 —
+                "혼자서도 오래 일할 수 있는 구조는 무엇인가."
+            </p>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill reveal">
+                <div class="skill-num">— 01</div>
+                <h4>Web <em>Design</em> &amp; Build</h4>
+                <p>쇼핑몰·브랜드 사이트·랜딩페이지를 직접 디자인하고 개발합니다. 18년 현장 경험에서 나오는 밸런스 감각이 강점입니다.</p>
+            </div>
+            <div class="skill reveal">
+                <div class="skill-num">— 02</div>
+                <h4>AI <em>Business</em> Consulting</h4>
+                <p>1인 사업자 / 소규모 브랜드의 업무 구조를 읽고, AI가 가장 효과적으로 쓰일 지점을 설계합니다.</p>
+            </div>
+            <div class="skill reveal">
+                <div class="skill-num">— 03</div>
+                <h4>Operation &amp; <em>Education</em></h4>
+                <p>교육 과정 운영, 행정, 홈페이지 제작을 1인 체계로 전담한 실전 경험을 바탕으로 실무 운영을 자문합니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+    <div class="values-noise"></div>
+    <div class="values-inner">
+        <div class="section-head reveal">
+            <span class="section-eyebrow">PHILOSOPHY</span>
+            <h2 class="section-title">제가 <em>일하는 이유</em>,<br>그리고 사는 방식.</h2>
+            <p class="section-desc">
+                작업물보다 오래 남는 건 태도라고 믿습니다. 아래 네 가지가 제가 타협하지 않는 원칙입니다.
+            </p>
+        </div>
+
+        <div class="values-list">
+            <div class="value reveal">
+                <div class="v-num">— 01</div>
+                <h4>기술이 아니라 <em>사람의 일</em>을 설계한다.</h4>
+                <p>AI는 도구일 뿐입니다. 중요한 건 지금 그 사람이 어떤 일을 어떻게 하고 있느냐이고, 그 흐름 위에 AI가 자연스럽게 얹혀야 한다는 것입니다.</p>
+            </div>
+            <div class="value reveal">
+                <div class="v-num">— 02</div>
+                <h4>1인 사업자를 위한 <em>지속 가능한 속도</em>.</h4>
+                <p>단기 전환보다 오래 혼자 감당할 수 있는 구조를 우선합니다. '이번 달 매출'과 '5년 뒤의 나'를 같이 생각하는 컨설팅.</p>
+            </div>
+            <div class="value reveal">
+                <div class="v-num">— 03</div>
+                <h4>건강한 <em>신체</em>와 지속적인 학습.</h4>
+                <p>잘 자고, 잘 움직이고, 잘 배우는 것. 결국 오랫동안 일하기 위해서는 몸과 공부하는 태도를 지켜야 한다는 것이 제 인생 철학입니다.</p>
+            </div>
+            <div class="value reveal">
+                <div class="v-num">— 04</div>
+                <h4>멋지게 <em>나이 들어가는</em> 삶.</h4>
+                <p>오래 한 사람만이 가질 수 있는 여유와 감각이 있습니다. 저는 그런 어른으로 나이 들고 싶고, 그런 일을 하고 싶습니다.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta" style="background: var(--hero-bg); text-align:center; padding:140px 0; position:relative; overflow:hidden;">
+    <div class="cta-glow" style="position:absolute;width:800px;height:800px;background:radial-gradient(ellipse,rgba(200,150,62,0.1) 0%,transparent 65%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;"></div>
+    <div class="container" style="position:relative;z-index:2;">
+        <h2 class="reveal" style="font-family:var(--font-serif);font-size:clamp(32px,5vw,60px);font-weight:300;color:var(--sand);line-height:1.2;margin-bottom:24px;">
+            이제, <em style="font-style:italic;color:var(--amber-light);">당신의 일</em>을<br>
+            함께 정리할 차례입니다.
+        </h2>
+        <p class="reveal" style="font-size:16px;color:rgba(245,240,232,0.5);margin:0 auto 48px;font-weight:300;max-width:600px;line-height:1.9;">
+            30분의 대화만으로도 다음 단계가 보이는 경우가 많습니다.<br>
+            부담 없이 상담 문의부터 시작해 주세요.
+        </p>
+        <div class="cta-inline reveal" style="display:flex;justify-content:center;gap:14px;flex-wrap:wrap;">
+            <a class="btn-hero" href="http://pf.kakao.com/_EjXzM/chat" target="_blank">
+                상담 문의하기
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn-ghost-hero" href="aiwork.html">AIwork 상세 보기</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="soul-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand-block">
+                <span class="footer-brand">SOUL</span>
+                <p>2007년부터 쇼핑몰을 만들어 온 18년 차 웹디자이너.<br>지금은 AI로 1인 사업자의 일하는 방식을 재설계합니다.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Practice</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="aiwork.html">AIwork</a></li>
+                    <li><a href="journal.html">Journal</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>AIwork</h4>
+                <ul>
+                    <li><a href="aiwork.html#service">상담 안내</a></li>
+                    <li><a href="aiwork.html#price">상담 비용</a></li>
+                    <li><a href="aiwork.html#process">진행 방식</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="http://pf.kakao.com/_EjXzM/chat" target="_blank">카카오톡 상담</a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#c8a0ada4a4a788bba7bda4e6a3ba">이메일 문의</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2026 SOUL. All rights reserved.</div>
+            <div class="footer-meta"><strong>쏘울(SOUL)</strong> · 한국인공지능인재개발원 · ChatGPT 교육 운영</div>
+        </div>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/soul-common.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

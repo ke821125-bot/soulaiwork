@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal · SOUL — 디자인, AI, 1인 사업에 관한 기록</title>
+    <meta name="description" content="18년 현장에서 쌓인 감각과 AI 조력자의 관점으로 쓰는 쏘울(SOUL)의 작업 일지. 1인 사업자를 위한 실용적인 글.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/soul-system.css">
+    <style>
+        body { background: var(--parchment); }
+
+        /* HERO */
+        .j-hero {
+            background: var(--parchment);
+            padding: 180px 0 80px;
+            border-bottom: 1px solid var(--border);
+        }
+        .j-hero-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 48px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: end;
+        }
+        .j-hero .eyebrow {
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        .j-hero .eyebrow::before {
+            content: ''; width: 36px; height: 1px; background: var(--amber);
+        }
+        .j-hero h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(44px, 7vw, 110px);
+            font-weight: 300;
+            line-height: 0.98;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            text-wrap: balance;
+        }
+        .j-hero h1 em { font-style: italic; color: var(--amber); font-weight: 400; }
+        .j-hero p {
+            font-size: 16px;
+            color: var(--muted);
+            line-height: 1.9;
+            font-weight: 300;
+            max-width: 480px;
+        }
+        .j-hero .meta {
+            margin-top: 28px;
+            font-size: 12px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--amber);
+            font-weight: 500;
+        }
+
+        /* CATEGORY STRIP */
+        .j-cats {
+            background: var(--cream);
+            border-bottom: 1px solid var(--border);
+            padding: 22px 0;
+        }
+        .j-cats-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .j-cats-list {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        .j-cats-list li a {
+            font-size: 13px;
+            color: var(--muted);
+            text-decoration: none;
+            letter-spacing: 0.05em;
+            transition: color 0.25s;
+            position: relative;
+        }
+        .j-cats-list li a:hover { color: var(--ink); }
+        .j-cats-list li.active a { color: var(--ink); font-weight: 500; }
+        .j-cats-list li.active a::after {
+            content: ''; position: absolute;
+            bottom: -6px; left: 0; right: 0;
+            height: 1px;
+            background: var(--amber);
+        }
+        .j-cats-inner .sort {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 15px;
+            color: var(--muted);
+        }
+
+        /* FEATURED ARTICLE */
+        .j-featured {
+            background: var(--cream);
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .featured-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 48px;
+        }
+        .featured-card {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 0;
+            background: var(--ink);
+            color: var(--sand);
+            overflow: hidden;
+            text-decoration: none;
+            transition: transform 0.4s var(--ease);
+        }
+        .featured-card:hover { transform: translateY(-4px); }
+        .featured-visual {
+            min-height: 420px;
+            background: linear-gradient(135deg, #2d2318, #1a1410 60%, #c8963e 140%);
+            position: relative;
+            overflow: hidden;
+        }
+        .featured-visual::before {
+            content: '';
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(circle at 30% 60%, rgba(200,150,62,0.25) 0%, transparent 45%),
+                repeating-linear-gradient(135deg, transparent 0 40px, rgba(245,240,232,0.04) 40px 41px);
+        }
+        .featured-visual .big-num {
+            position: absolute;
+            top: 40px; left: 40px;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 140px;
+            font-weight: 300;
+            color: rgba(200,150,62,0.3);
+            line-height: 1;
+        }
+        .featured-visual .tag {
+            position: absolute;
+            bottom: 40px; left: 40px;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--amber);
+            font-weight: 600;
+        }
+        .featured-body {
+            padding: 60px 56px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .featured-body .eyebrow {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+        .featured-body h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(28px, 3.6vw, 48px);
+            font-weight: 400;
+            line-height: 1.2;
+            color: var(--sand);
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+            text-wrap: balance;
+        }
+        .featured-body h2 em { font-style: italic; color: var(--amber-light); }
+        .featured-body p {
+            font-size: 15px;
+            color: rgba(245,240,232,0.62);
+            line-height: 1.9;
+            font-weight: 300;
+            margin-bottom: 32px;
+            max-width: 460px;
+        }
+        .featured-body .meta-row {
+            display: flex;
+            gap: 24px;
+            font-size: 12px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(245,240,232,0.45);
+            font-weight: 500;
+        }
+        .featured-body .read-more {
+            margin-top: 32px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            color: var(--amber-light);
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* ARTICLE LIST */
+        .j-list { padding: 100px 0 140px; }
+        .list-inner {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 48px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px 32px;
+        }
+        .article {
+            text-decoration: none;
+            color: var(--ink);
+            display: block;
+            transition: transform 0.4s var(--ease);
+        }
+        .article:hover { transform: translateY(-4px); }
+        .article .art-visual {
+            aspect-ratio: 4 / 3;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: border-color 0.3s;
+        }
+        .article:hover .art-visual { border-color: var(--amber); }
+        .article .art-visual .num {
+            position: absolute;
+            top: 20px; left: 24px;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 32px;
+            color: rgba(200,150,62,0.45);
+            line-height: 1;
+            z-index: 2;
+        }
+        .article .art-visual .tag {
+            position: absolute;
+            bottom: 20px; left: 24px;
+            font-size: 10px;
+            letter-spacing: 0.24em;
+            text-transform: uppercase;
+            color: var(--amber);
+            font-weight: 600;
+            z-index: 2;
+        }
+        .article-info { padding-top: 24px; }
+        .article-info .date {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 13px;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+        .article-info h3 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 400;
+            line-height: 1.35;
+            margin-bottom: 10px;
+            color: var(--ink);
+            letter-spacing: -0.01em;
+            text-wrap: balance;
+        }
+        .article-info h3 em { font-style: italic; color: var(--amber); }
+        .article-info p {
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.7;
+            font-weight: 300;
+            margin-bottom: 12px;
+        }
+        .article-info .rt {
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        /* Article visual patterns */
+        .avp1 { background: linear-gradient(135deg, #2d2318, #1a1410); }
+        .avp1::before { content:''; position:absolute; inset:0; background: radial-gradient(circle at 70% 40%, rgba(200,150,62,0.2) 0%, transparent 50%); }
+        .avp2 { background: linear-gradient(160deg, #faf7f2, #f5e6c8); }
+        .avp2::before { content:''; position:absolute; inset:0; background: repeating-linear-gradient(45deg, transparent 0 30px, rgba(200,150,62,0.1) 30px 31px); }
+        .avp3 { background: #c8963e; }
+        .avp3::before { content:''; position:absolute; inset:0; background: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.2) 0%, transparent 45%); }
+        .avp4 { background: #f5f0e8; }
+        .avp4::before { content:''; position:absolute; inset:0; background: linear-gradient(90deg, transparent 48%, rgba(26,20,16,0.1) 49%, rgba(26,20,16,0.1) 51%, transparent 52%) 0 0 / 20px 100%; }
+        .avp5 { background: linear-gradient(140deg, #1a1410, #c8963e 150%); }
+        .avp5::before { content:''; position:absolute; inset:0; background: repeating-radial-gradient(circle at 30% 50%, rgba(200,150,62,0.15) 0 1px, transparent 1px 30px); }
+        .avp6 { background: linear-gradient(120deg, #fffdf9, #e2d9cc); }
+        .avp6::before { content:''; position:absolute; inset:0; background: linear-gradient(135deg, transparent 48%, rgba(200,150,62,0.2) 49%, rgba(200,150,62,0.2) 51%, transparent 52%) 0 0 / 40px 40px; }
+
+        /* NEWSLETTER */
+        .newsletter {
+            background: var(--ink);
+            color: var(--sand);
+            padding: 120px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .newsletter-noise {
+            position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .newsletter .container { position: relative; z-index: 2; }
+        .newsletter .eyebrow {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--amber);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .newsletter h2 {
+            font-family: var(--font-serif);
+            font-size: clamp(30px, 4.2vw, 56px);
+            font-weight: 300;
+            line-height: 1.25;
+            color: var(--sand);
+            margin-bottom: 24px;
+            text-wrap: balance;
+        }
+        .newsletter h2 em { color: var(--amber-light); }
+        .newsletter p {
+            font-size: 15px;
+            color: rgba(245,240,232,0.55);
+            line-height: 1.9;
+            font-weight: 300;
+            max-width: 540px;
+            margin: 0 auto 40px;
+        }
+        .nl-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 0;
+            border: 1px solid rgba(245,240,232,0.15);
+        }
+        .nl-form input {
+            flex: 1;
+            padding: 18px 22px;
+            background: transparent;
+            border: none;
+            color: var(--sand);
+            font-family: var(--font-sans);
+            font-size: 14px;
+            outline: none;
+        }
+        .nl-form input::placeholder { color: rgba(245,240,232,0.35); }
+        .nl-form button {
+            background: var(--amber);
+            color: var(--ink);
+            border: none;
+            padding: 18px 28px;
+            font-size: 12px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .nl-form button:hover { background: var(--amber-light); }
+        .nl-note {
+            margin-top: 16px;
+            font-size: 11px;
+            color: rgba(245,240,232,0.35);
+            letter-spacing: 0.1em;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1000px) {
+            .j-hero { padding: 140px 0 60px; }
+            .j-hero-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; }
+            .j-cats-inner { padding: 0 24px; }
+            .j-cats-list { gap: 18px; }
+            .j-featured { padding: 50px 0; }
+            .featured-inner { padding: 0 24px; }
+            .featured-card { grid-template-columns: 1fr; }
+            .featured-visual { min-height: 260px; }
+            .featured-body { padding: 40px 32px; }
+            .featured-visual .big-num { font-size: 80px; top: 24px; left: 24px; }
+            .j-list { padding: 60px 0 100px; }
+            .list-inner { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; }
+            .newsletter { padding: 80px 0; }
+        }
+
+		/*문의 폼*/
+	#contact {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #58afdc;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 14px;
+  background-color: #58afdc;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #268abe;
+}
+
+#successMsg {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  padding: 40px 0;
+}
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="soul-header solid" id="main-header">
+    <a href="index.html" class="logo">
+        SOUL
+        <span class="logo-sub">Since 2007</span>
+    </a>
+    <nav>
+        <ul class="nav-links">
+            <li><a href="about.html">About</a></li>
+            <li><a href="portfolio.html">Portfolio</a></li>
+            <li><a href="aiwork.html">AIwork</a></li>
+            <li><a href="journal.html" class="current">Journal</a></li>
+            <li><a href="http://pf.kakao.com/_EjXzM/chat" target="_blank" class="nav-cta">상담 문의</a></li>
+        </ul>
+    </nav>
+    <button class="hamburger" id="hamburger-btn" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+    </button>
+</header>
+
+<div class="mobile-menu" id="mobile-menu">
+    <nav>
+        <a href="about.html">About</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="aiwork.html">AIwork</a>
+        <a href="journal.html">Journal</a>
+        <a href="http://pf.kakao.com/_EjXzM/chat" target="_blank" class="mobile-cta">상담 문의하기 →</a>
+    </nav>
+</div>
+
+<!-- HERO -->
+<section class="j-hero">
+    <div class="j-hero-inner">
+        <div class="reveal">
+            <div class="eyebrow">JOURNAL · SOUL NOTES</div>
+            <h1>
+                디자인, AI,<br>
+                그리고 <em>1인 사업</em>에 관한 기록.
+            </h1>
+        </div>
+        <div class="reveal">
+            <p>
+                현장에서 쌓인 감각과 1인 사업자를 위한 실용적인 관점으로 씁니다.
+                기술 소식보다는 '내 일에 어떻게 쓸 것인가'에 관한 글이 많습니다.
+            </p>
+            <div class="meta">Updated monthly · Seoul</div>
+        </div>
+    </div>
+</section>
+
+<!-- CATEGORY STRIP -->
+<nav class="j-cats">
+    <div class="j-cats-inner">
+        <ul class="j-cats-list">
+            <li class="active"><a href="#">All</a></li>
+            <li><a href="#">AI Workflow</a></li>
+            <li><a href="#">Solo Business</a></li>
+            <li><a href="#">Web Design</a></li>
+            <li><a href="#">Essays</a></li>
+            <li><a href="#">Tool Notes</a></li>
+        </ul>
+        <div class="sort">Latest first</div>
+    </div>
+</nav>
+
+<!-- FEATURED -->
+<section class="j-featured">
+    <div class="featured-inner">
+        <a href="#" class="featured-card reveal">
+            <div class="featured-visual">
+                <div class="big-num">01</div>
+                <div class="tag">Featured Essay</div>
+            </div>
+            <div class="featured-body">
+                <div class="eyebrow">AI Workflow · Editor's pick</div>
+                <h2>
+                    AI는 배우는 것이 아니라,<br>
+                    <em>자리를 만드는 일</em>입니다.
+                </h2>
+                <p>
+                    "왜 배워도 써지지 않을까?"라는 질문에 대한 답. 배움이 문제라기보다,
+                    지금 하는 일에 AI를 '끼워 넣을 자리'가 없기 때문이라는 이야기를 씁니다.
+                </p>
+                <div class="meta-row">
+                    <span>2026.04.18</span>
+                    <span>·</span>
+                    <span>8 min read</span>
+                </div>
+                <span class="read-more">
+                    Read the essay
+                    <svg width="14" height="10" viewBox="0 0 16 12" fill="none"><path d="M1 6h14M10 1l5 5-5 5" stroke="currentColor" stroke-width="1.5"/></svg>
+                </span>
+            </div>
+        </a>
+    </div>
+</section>
+
+<!-- ARTICLE LIST -->
+<section class="j-list">
+    <div class="list-inner">
+
+        <a href="#" class="article reveal">
+            <div class="art-visual avp2">
+                <span class="num">02</span>
+                <span class="tag">Solo Business</span>
+            </div>
+            <div class="article-info">
+                <div class="date">April 10, 2026</div>
+                <h3>1인 사업자를 위한 <em>일의 지도</em> 만들기</h3>
+                <p>내 업무를 6개 블록으로 정리하는 가장 단순한 방법.</p>
+                <span class="rt">6 min read</span>
+            </div>
+        </a>
+
+        <a href="#" class="article reveal">
+            <div class="art-visual avp3">
+                <span class="num" style="color:rgba(255,255,255,0.55);">03</span>
+                <span class="tag" style="color:#fff;">Tool Notes</span>
+            </div>
+            <div class="article-info">
+                <div class="date">April 02, 2026</div>
+                <h3>ChatGPT, Claude, Gemini —<br>어디에 <em>뭘</em> 쓰고 있나</h3>
+                <p>세 개의 AI를 구분해서 쓰기 시작한 뒤 달라진 점.</p>
+                <span class="rt">5 min read</span>
+            </div>
+        </a>
+
+        <a href="#" class="article reveal">
+            <div class="art-visual avp4">
+                <span class="num" style="color:rgba(26,20,16,0.4);">04</span>
+                <span class="tag">Web Design</span>
+            </div>
+            <div class="article-info">
+                <div class="date">March 24, 2026</div>
+                <h3>2026 글로벌 웹 디자인의 <em>조용한 흐름</em></h3>
+                <p>에디토리얼, 모노크롬, 세리프 컴백 — 왜 지금일까.</p>
+                <span class="rt">7 min read</span>
+            </div>
+        </a>
+
+        <a href="#" class="article reveal">
+            <div class="art-visual avp5">
+                <span class="num">05</span>
+                <span class="tag">AI Workflow</span>
+            </div>
+            <div class="article-info">
+                <div class="date">March 18, 2026</div>
+                <h3>반복 업무를 <em>AI에게</em> 넘기는 5가지 패턴</h3>
+                <p>내가 실제로 쓰고 있는 AI 자동화 구조 공개.</p>
+                <span class="rt">9 min read</span>
+            </div>
+        </a>
+
+        <a href="#" class="article reveal">
+            <div class="art-visual avp6">
+                <span class="num" style="color:rgba(200,150,62,0.6);">06</span>
+                <span class="tag">Essays</span>
+            </div>
+            <div class="article-info">
+                <div class="date">March 10, 2026</div>
+                <h3>18년차가 된다는 것 —<br><em>오래 하는 사람</em>의 감각</h3>
+                <p>쇼핑몰을 18년 만들면서 얻은 한 가지 태도.</p>
+                <span class="rt">6 min read</span>
+            </div>
+        </a>
+
+        <a href="#" class="article reveal">
+            <div class="art-visual avp1">
+                <span class="num">07</span>
+                <span class="tag">AI Workflow</span>
+            </div>
+            <div class="article-info">
+                <div class="date">March 01, 2026</div>
+                <h3>1인 기업의 <em>콘텐츠 공장</em>, AI로 어떻게 짜나</h3>
+                <p>블로그·SNS·뉴스레터를 하나의 원천에서 뽑는 구조.</p>
+                <span class="rt">8 min read</span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section id="contact">
+  <h2>문의하기</h2>
+
+  <form id="contactForm" action="https://formspree.io/f/xbdqleba" method="POST">
+    
+    <div class="form-group">
+      <label for="name">이름</label>
+      <input type="text" id="name" name="name" placeholder="홍길동" required>
+    </div>
+
+    <div class="form-group">
+      <label for="email">이메일</label>
+      <input type="email" id="email" name="email" placeholder="email@example.com" required>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">연락처 (선택)</label>
+      <input type="tel" id="phone" name="phone" placeholder="010-0000-0000">
+    </div>
+
+    <div class="form-group">
+      <label for="message">문의 내용</label>
+      <textarea id="message" name="message" rows="5" placeholder="문의 내용을 입력해주세요." required></textarea>
+    </div>
+
+    <!-- 스팸 방지 (숨김 처리) -->
+    <input type="text" name="_gotcha" style="display:none">
+
+    <button type="submit">문의 보내기</button>
+
+  </form>
+
+  <!-- 제출 완료 메시지 (기본 숨김) -->
+  <div id="successMsg" style="display:none;">
+    <p>✅ 문의가 접수되었습니다. 빠르게 연락드리겠습니다.</p>
+  </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="soul-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand-block">
+                <span class="footer-brand">SOUL</span>
+                <p>2007년부터 쇼핑몰을 만들어 온 18년 차 웹디자이너.<br>지금은 AI로 1인 사업자의 일하는 방식을 재설계합니다.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Practice</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="aiwork.html">AIwork</a></li>
+                    <li><a href="journal.html">Journal</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>AIwork</h4>
+                <ul>
+                    <li><a href="aiwork.html#service">상담 안내</a></li>
+                    <li><a href="aiwork.html#price">상담 비용</a></li>
+                    <li><a href="aiwork.html#process">진행 방식</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="http://pf.kakao.com/_EjXzM/chat" target="_blank">카카오톡 상담</a></li>
+                    <li><a href="/cdn-cgi/l/email-protection#8ee6ebe2e2e1cefde1fbe2a0e5fc">이메일 문의</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2026 SOUL. All rights reserved.</div>
+            <div class="footer-meta"><strong>쏘울(SOUL)</strong> · 한국인공지능인재개발원 · ChatGPT 교육 운영</div>
+        </div>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="assets/js/soul-common.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+
+<script>  /* 문의 폼 스크립트*/
+  const form = document.getElementById('contactForm');
+  const successMsg = document.getElementById('successMsg');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault(); // 기본 제출 막기
+
+    const formData = new FormData(form);
+
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      form.style.display = 'none';      // 폼 숨기기
+      successMsg.style.display = 'block'; // 완료 메시지 표시
+    } else {
+      alert('제출 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
+  });
+</script>
+
+</body>
+</html>
